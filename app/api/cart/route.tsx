@@ -8,7 +8,10 @@ export const POST = async (req: NextRequest) => {
     const { userId, productId } = await req.json();
 
     const cart = await prisma.cart.findFirst({
-      where: {},
+      where: {
+        userId: userId,
+        productId: productId,
+      },
     });
   } catch (error) {
     console.log(error);

@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const response: any = await axios.get("/api/auth/profile");
         console.log(response.data);
         setUser(response.data.user);
+        localStorage.setItem("userId", response.data.user.id);
       } catch (error: any) {
         console.error("Failed to fetch user details:", error);
         toast({

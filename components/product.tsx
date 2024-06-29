@@ -1,8 +1,18 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+"use client";
+import { useAuth } from "@/context/authContext";
+import { useCart } from "@/context/cartContext";
+import { Box, Button, Flex, Image, Text, useToast } from "@chakra-ui/react";
+import axios from "axios";
 import { ArrowLeft, ArrowRight, Heart } from "iconsax-react";
 import React from "react";
 
-const Product = (props: { name: string; image: string; price: string }) => {
+const Product = (props: {
+  id: string;
+  name: string;
+  image: string;
+  price: string;
+}) => {
+  const { addToCart } = useCart();
   return (
     <Box
       border={"2px solid #BB7A42"}
@@ -45,6 +55,9 @@ const Product = (props: { name: string; image: string; price: string }) => {
       >
         <Button
           rightIcon={<ArrowRight />}
+          onClick={() => {
+            addToCart(props.id, 1);
+          }}
           color={"#BB7A42"}
           bg={"none"}
           _hover={{ bg: "none" }}

@@ -2,6 +2,7 @@
 import CartItem from "@/components/cartItem";
 import Logo from "@/components/logo";
 import { AuthContext, useAuth } from "@/context/authContext";
+import { useCart } from "@/context/cartContext";
 import {
   Box,
   Button,
@@ -18,7 +19,10 @@ import {
   useDisclosure,
   Spinner,
   Avatar,
+  Skeleton,
+  Heading,
 } from "@chakra-ui/react";
+import axios from "axios";
 import {
   Google,
   HambergerMenu,
@@ -27,7 +31,8 @@ import {
   Wallet,
 } from "iconsax-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import PaymentAction from "./paymentAction";
 
 interface Product {
   id: string;
@@ -39,6 +44,21 @@ interface Product {
   createdAt: string;
 }
 
+interface User {
+  id: string | null;
+  username: string | null;
+  email: string | null;
+}
+
+interface Cart {
+  id: string;
+  user: User;
+  userId: string;
+  createdAt: string;
+  product: Product;
+  productId: string;
+  quantity: number;
+}
 const Header = () => {
   const { user } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,16 +66,38 @@ const Header = () => {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
+  const [tot, setTot] = useState<number>(0);
+  const [carts, setCarts] = useState<Cart[] | null>([]);
+
+  const { cart, total } = useCart();
+
+  const fetchCart = async () => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      try {
+        const response = await axios.get(`/api/cart/${userId}`);
+        setCarts(response.data.orders);
+        getTotal();
+      } catch (error) {
+        console.error("Error fetching cart", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  const getTotal = () => {
+    carts?.map((cart, key) => {
+      setTot(tot + Number(cart.product.price * Number(cart.quantity)));
+    });
+  };
+
   return (
     <Box>
       <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Logo />
-        <Box
-          cursor={"pointer"}
-          display={{ lg: "none", md: "block", sm: "block", base: "block" }}
-        >
-          <HambergerMenu size={40} />
-        </Box>
         <Flex
           display={{ lg: "flex", md: "none", sm: "none", base: "none" }}
           gap={20}
@@ -79,7 +121,7 @@ const Header = () => {
         </Flex>
 
         <Flex
-          display={{ lg: "flex", md: "none", sm: "none", base: "none" }}
+          display={{ lg: "flex", md: "flex", sm: "flex", base: "flex" }}
           gap={10}
           alignItems={"center"}
         >
@@ -130,7 +172,6 @@ const Header = () => {
               Login / Sign up
             </Button>
           )}
-          {/* <img src="/ddd.png" alt="" /> */}
         </Flex>
       </Flex>
       <>
@@ -145,11 +186,24 @@ const Header = () => {
               </Flex>
             </DrawerHeader>
             <DrawerBody>
-              <CartItem
-                image="http://localhost:3000/coffe-cup.jpg"
-                name="Food APp"
-                price="3000"
-              />
+              {cart?.length > 0 ? (
+                cart.map((c: any, key: any) => (
+                  <CartItem
+                    key={key}
+                    description={c.product.description}
+                    quantity={c.quantity}
+                    image={c.product.image}
+                    id={c.id}
+                    productId={c.product.id}
+                    name={c.product.name}
+                    price={c.product.price}
+                  />
+                ))
+              ) : cart === null ? (
+                <Skeleton height={100} />
+              ) : (
+                <Heading>NO CART YET</Heading>
+              )}
             </DrawerBody>
             <DrawerFooter>
               <Flex
@@ -158,11 +212,11 @@ const Header = () => {
                 fontSize={40}
               >
                 <Text>Total</Text>
-                <Text>$9000</Text>
+                <Text>$ {total}</Text>
               </Flex>
             </DrawerFooter>
             <DrawerFooter>
-              <Button
+              {/* <Button
                 width={"100%"}
                 py={8}
                 bg={"#74422D"}
@@ -174,7 +228,8 @@ const Header = () => {
                 _hover={{ bg: "#74422D" }}
               >
                 {loading ? <Spinner /> : "Pay Now"}
-              </Button>
+              </Button> */}
+              <PaymentAction total={total} />
             </DrawerFooter>
           </DrawerContent>
         </Drawer>

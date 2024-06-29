@@ -33,7 +33,7 @@ const page = () => {
         password: user.password,
       })
       .then((response) => {
-        if (response.status != 200) {
+        if (response.data.error) {
           setLoading(false);
           toast({
             title: "Login Failure",

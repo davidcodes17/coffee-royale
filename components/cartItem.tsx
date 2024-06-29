@@ -1,9 +1,11 @@
+"use client";
+import { useAuth } from "@/context/authContext";
+import { useCart } from "@/context/cartContext";
 import {
   Box,
   CloseButton,
   Flex,
   Image,
-  Input,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
@@ -11,27 +13,48 @@ import {
   NumberInputStepper,
   Text,
 } from "@chakra-ui/react";
-import { AddCircle, MinusCirlce } from "iconsax-react";
-import React from "react";
+import React, { useState } from "react";
 
-const CartItem = (props: { name: string; price: string; image: string }) => {
+const CartItem = (props: {
+  name: string;
+  price: number; // Changed to number type
+  image: string;
+  description: string;
+  id: string;
+  productId: string;
+  quantity: number;
+}) => {
+  const [quantity, setQuantity] = useState<number>(props.quantity);
+  const { updateCartItem, removeFromCart } = useCart();
+
+  // Update the quantity in the cart and set the total
+  const handleQuantityChange = (value: string) => {
+    const newQuantity = Number(value);
+    setQuantity(newQuantity);
+    updateCartItem(props.id, newQuantity);
+  };
+
   return (
-    <Box
-      bg={"#FCF9F8"}
-      my={5}
-      px={5}
-      py={5}
-      borderRadius={20}
-      cursor={"pointer"}
-    >
+    <Box bg={"#FCF9F8"} my={5} px={5} py={5} borderRadius={20}>
       <Flex alignItems={"center"} justifyContent={"space-between"}>
-        <Image borderRadius={10} width={100} src="coffee-package.jpg" />
+        <Image
+          borderRadius={10}
+          objectFit={"cover"}
+          width={100}
+          src={props.image}
+          height={70}
+        />
         <Box>
           <Text fontWeight={600}>{props.name}</Text>
-          <Text>400ml</Text>
+          <Text>{props.description}</Text>
         </Box>
         <Box>
-          <NumberInput defaultValue={0} min={0} max={10}>
+          <NumberInput
+            value={quantity}
+            onChange={handleQuantityChange}
+            min={1}
+            max={10}
+          >
             <NumberInputField width={100} />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -40,10 +63,10 @@ const CartItem = (props: { name: string; price: string; image: string }) => {
           </NumberInput>
         </Box>
         <Box>
-          <Text fontSize={20}>${props.price}</Text>
+          <Text fontSize={20}>${props.price * quantity}</Text>
         </Box>
         <Box>
-          <CloseButton />
+          <CloseButton onClick={() => removeFromCart(props.id)} />
         </Box>
       </Flex>
     </Box>

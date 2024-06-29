@@ -40,8 +40,8 @@ export const POST = async (req: NextRequest) => {
 
     response.cookies.set("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
       expires: new Date().setDate(new Date().getDate() + 1),
     });
 

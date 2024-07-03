@@ -19,7 +19,12 @@ const Products = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response: any = await axios.get("/api/product");
+      const response: any = await axios.get("/api/product", {
+        withCredentials: true,
+        headers: {
+          // Any additional headers can be added here
+        },
+      });
       console.log(response.data.products);
       setProducts(response.data.products);
     };

@@ -1,3 +1,4 @@
+"use client";
 import Line from "@/components/line";
 import { AuthProvider } from "@/context/authContext";
 import { CartProvider } from "@/context/cartContext";

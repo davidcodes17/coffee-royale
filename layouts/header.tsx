@@ -75,7 +75,12 @@ const Header = () => {
     const userId = localStorage.getItem("userId");
     if (userId) {
       try {
-        const response = await axios.get(`/api/cart/${userId}`);
+        const response = await axios.get(`/api/cart/${userId}`, {
+          withCredentials: true,
+          headers: {
+            // Any additional headers can be added here
+          },
+        });
         setCarts(response.data.orders);
         getTotal();
       } catch (error) {

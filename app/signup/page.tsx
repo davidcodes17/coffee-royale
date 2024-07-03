@@ -29,13 +29,23 @@ const page = () => {
   const handleSignup = () => {
     setLoading(true);
     axios
-      .post("/api/auth/signup", {
-        username: user.username,
-        email: user.email,
-        password: user.password,
-      })
+      .post(
+        "/api/auth/signup",
+        {
+          username: user.username,
+          email: user.email,
+          password: user.password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            // Any additional headers can be added here
+          },
+        }
+      )
       .then((response) => {
         if (response.status != 200) {
+          setLoading(false);
           toast({
             title: "Account Created",
             description: response.data.error,
@@ -43,8 +53,8 @@ const page = () => {
             duration: 2000,
             position: "top-right",
           });
-          setLoading(true);
         } else {
+          setLoading(false);
           toast({
             title: "Account Creation Failed",
             description: "Account Created Successfully",

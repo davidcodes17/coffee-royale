@@ -14,6 +14,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { headers } from "next/headers";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -27,14 +28,26 @@ const page = () => {
   });
   const url = "/api/auth/login";
   const handleLogin = () => {
+    setLoading(true); // Start loading state
+
     axios
-      .post("/api/auth/login", {
-        email: user.email,
-        password: user.password,
-      })
+      .post(
+        "/api/auth/login",
+        {
+          email: user.email,
+          password: user.password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            // Any additional headers can be added here
+          },
+        }
+      )
       .then((response) => {
+        setLoading(false); // Stop loading state
+
         if (response.data.error) {
-          setLoading(false);
           toast({
             title: "Login Failure",
             description: response.data.error,
@@ -52,8 +65,20 @@ const page = () => {
           });
           navigate.push("/");
         }
+      })
+      .catch((error) => {
+        setLoading(false); // Stop loading state in case of an error
+
+        toast({
+          title: "Login Error",
+          description: error.response?.data?.message || "An error occurred.",
+          status: "error",
+          duration: 2000,
+          position: "top-right",
+        });
       });
   };
+
   return (
     <Box>
       <Flex

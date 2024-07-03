@@ -60,7 +60,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     const userId = localStorage.getItem("userId");
     if (userId) {
       try {
-        const response = await axios.get(`/api/cart/${userId}`);
+        const response = await axios.get(`/api/cart/${userId}`, {
+          withCredentials: true,
+          headers: {
+            // Any additional headers can be added here
+          },
+        });
         setCart(response.data.orders);
       } catch (error) {
         console.error("Error fetching cart", error);
@@ -74,11 +79,20 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     if (!userId) return;
 
     try {
-      const response = await axios.post("/api/cart", {
-        userId,
-        productId,
-        quantity,
-      });
+      const response = await axios.post(
+        "/api/cart",
+        {
+          userId,
+          productId,
+          quantity,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            // Any additional headers can be added here
+          },
+        }
+      );
       setCart(response.data.orders);
       fetchCart();
     } catch (error) {
@@ -89,7 +103,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   // Remove an item from the cart
   const removeFromCart = useCallback(async (cartItemId: string) => {
     try {
-      await axios.delete(`/api/cart/${cartItemId}`);
+      await axios.delete(`/api/cart/${cartItemId}`, {
+        withCredentials: true,
+        headers: {
+          // Any additional headers can be added here
+        },
+      });
       setCart((prevCart) => prevCart.filter((item) => item.id !== cartItemId));
       fetchCart();
     } catch (error) {

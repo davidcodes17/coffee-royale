@@ -37,7 +37,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const fetchUserDetail = async () => {
       try {
-        const response: any = await axios.get("/api/auth/profile");
+        const response: any = await axios.get("/api/auth/profile", {
+          withCredentials: true,
+          headers: {
+            // Any additional headers can be added here
+          },
+        });
         console.log(response.data);
         setUser(response.data.user);
         localStorage.setItem("userId", response.data.user.id);

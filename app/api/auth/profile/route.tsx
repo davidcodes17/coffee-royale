@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 // Secret key should be stored in an environment variable for security reasons.
 const secret = process.env.JWT_SECRET || "secret-key";

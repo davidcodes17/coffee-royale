@@ -49,25 +49,19 @@ export const GET = async (
 export const PUT = async (req: NextRequest, { params }: { params: any }) => {
   try {
     const { id } = params;
-    const { productId, quantity } = await req.json();
+    const { quantity } = await req.json();
 
     const isPresent = await prisma.cart.findFirst({
       where: {
         id: id,
       },
+      include: {
+        product: true,
+      },
     });
 
     if (!isPresent)
       return NextResponse.json({ error: "Cart Not Found" }, { status: 400 });
-
-    const product = await prisma.product.findFirst({
-      where: {
-        id: productId,
-      },
-    });
-
-    if (!product)
-      return NextResponse.json({ error: "Product Not Found" }, { status: 400 });
 
     const cart = await prisma.cart.update({
       where: {

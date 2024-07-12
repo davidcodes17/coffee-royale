@@ -135,11 +135,11 @@ const page = () => {
                 py={7}
               />
             </FormControl>
-            <Link>
+            {/* <Link>
               <Text textAlign={"right"} mt={5}>
                 Forgotten Password?
               </Text>
-            </Link>
+            </Link> */}
             <Button
               mt={5}
               width={"100%"}

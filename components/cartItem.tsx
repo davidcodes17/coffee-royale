@@ -36,7 +36,7 @@ const CartItem = (props: {
 
   return (
     <Box bg={"#FCF9F8"} my={5} px={5} py={5} borderRadius={20}>
-      <Flex alignItems={"center"} justifyContent={"space-between"}>
+      <Flex alignItems={"center"} gap={5} justifyContent={"space-between"}>
         <Image
           borderRadius={10}
           objectFit={"cover"}
@@ -46,7 +46,11 @@ const CartItem = (props: {
         />
         <Box>
           <Text fontWeight={600}>{props.name}</Text>
-          <Text>{props.description}</Text>
+          <Text
+            display={{ lg: "block", md: "block", sm: "none", base: "none" }}
+          >
+            {props.description}
+          </Text>
         </Box>
         <Box>
           <NumberInput
@@ -55,7 +59,7 @@ const CartItem = (props: {
             min={1}
             max={10}
           >
-            <NumberInputField width={100} />
+            <NumberInputField width={{ lg: 100, md: 100, sm: 70 }} />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />

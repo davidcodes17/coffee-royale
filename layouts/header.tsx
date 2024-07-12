@@ -127,7 +127,7 @@ const Header = () => {
 
         <Flex
           display={{ lg: "flex", md: "flex", sm: "flex", base: "flex" }}
-          gap={10}
+          gap={{ lg: 10, md: 9, sm: 5, base: 5 }}
           alignItems={"center"}
         >
           <Box
@@ -182,7 +182,14 @@ const Header = () => {
       <>
         <Drawer isOpen={isOpen} placement="right" size={"lg"} onClose={onClose}>
           <DrawerOverlay />
-          <DrawerContent width={"1500px !important"}>
+          <DrawerContent
+            width={{
+              lg: "1500px !important",
+              md: "1400px !important",
+              sm: "auto",
+              base: "auto",
+            }}
+          >
             <DrawerHeader borderBottomWidth={"1px"}>
               <Flex alignItems={"center"} gap={3}>
                 <DrawerCloseButton mt={4} size={"lg"} />
@@ -221,19 +228,6 @@ const Header = () => {
               </Flex>
             </DrawerFooter>
             <DrawerFooter>
-              {/* <Button
-                width={"100%"}
-                py={8}
-                bg={"#74422D"}
-                onClick={() => {
-                  setLoading(!loading);
-                }}
-                color={"#fff"}
-                leftIcon={<Wallet />}
-                _hover={{ bg: "#74422D" }}
-              >
-                {loading ? <Spinner /> : "Pay Now"}
-              </Button> */}
               <PaymentAction total={total} />
             </DrawerFooter>
           </DrawerContent>

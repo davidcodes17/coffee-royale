@@ -3,7 +3,10 @@ import React from "react";
 
 const Line = () => {
   return (
-    <Box mt={"60px"}>
+    <Box
+      mt={"60px"}
+      display={{ lg: "block", md: "block", sm: "none", base: "none" }}
+    >
       <Flex
         py={10}
         justifyContent={"space-between"}

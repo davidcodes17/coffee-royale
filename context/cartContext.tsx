@@ -6,6 +6,8 @@ import React, {
   ReactNode,
   useEffect,
   useCallback,
+  SetStateAction,
+  Dispatch,
 } from "react";
 import axios from "axios";
 
@@ -126,10 +128,32 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         return item;
       })
     );
-    fetchCart();
+    calculateTotal();
+    updateFunction(cartItemId, quantity);
   }, []);
 
-  // Clear the cart
+  const updateFunction = async (cartItemId: string, quantity: number) => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) return;
+    try {
+      const response = await axios.put(
+        "/api/cart/" + cartItemId,
+        {
+          userId,
+          quantity,
+        },
+        {
+          withCredentials: true,
+          headers: {},
+        }
+      );
+      setCart(response.data.orders);
+      fetchCart();
+    } catch (error) {
+      console.error("Error adding to cart", error);
+    }
+  };
+
   const clearCart = useCallback(() => {
     setCart([]);
     setTotal(0);

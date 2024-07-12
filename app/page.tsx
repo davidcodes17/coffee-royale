@@ -16,7 +16,7 @@ const page = () => {
     <AuthProvider>
       <CartProvider>
         <Box>
-          <Box height={"100vh"}>
+          <Box height={{ lg: "100vh", md: "100vh", sm: "100%", base: "100%" }}>
             <Box px={{ lg: 20, md: 10, sm: 5, base: 5 }} pt={10}>
               <Header />
               <Hero />

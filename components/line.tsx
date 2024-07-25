@@ -45,6 +45,7 @@ const Line = () => {
         >
           <Box overflow="hidden" whiteSpace="nowrap">
             <Flex
+              borderRadius={40}
               gap={10}
               animation="scroll 10s linear infinite"
               css={{

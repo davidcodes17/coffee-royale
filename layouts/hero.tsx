@@ -2,11 +2,11 @@
 import { useAuth } from "@/context/authContext";
 import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { ArrowRight2 } from "iconsax-react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import React from "react";
 
 const Hero = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const { user } = useAuth();
   return (
     <Box mt={{ lg: 50, md: 10, sm: 5, base: 5 }}>
@@ -59,7 +59,7 @@ const Hero = () => {
                 px={{ lg: 7, md: 5, sm: 5, base: 5 }}
                 borderRadius={40}
                 onClick={() => {
-                  router.push("/login");
+                  window.location.replace("/login");
                 }}
                 fontSize={{ lg: 12, md: 12, sm: 12, base: 12 }}
                 color={"#74422D"}

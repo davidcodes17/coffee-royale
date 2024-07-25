@@ -10,6 +10,7 @@ import React, {
   Dispatch,
 } from "react";
 import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 
 interface Product {
   id: string;
@@ -45,6 +46,7 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const toast = useToast();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [total, setTotal] = useState<number>(0);
 
@@ -96,6 +98,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         }
       );
       setCart(response.data.orders);
+      toast({
+        title: "Item added to cart",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
       fetchCart();
     } catch (error) {
       console.error("Error adding to cart", error);

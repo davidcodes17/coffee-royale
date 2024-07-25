@@ -14,7 +14,7 @@ interface Product {
   image: string;
 }
 
-const Products = () => {
+const Products = (data: { mt: number }) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Products = () => {
     fetchProducts();
   }, []);
   return (
-    <Box mt={{ lg: 100, md: 200, sm: 100, base: 100 }}>
+    <Box id="products" mt={{ lg: data.mt, md: 200, sm: 100, base: 100 }}>
       <Flex justifyContent={"center"}>
         <Box textAlign={"center"}>
           <Heading fontSize={{ lg: 70, md: 40, sm: 40, base: 40 }}>

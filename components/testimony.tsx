@@ -2,7 +2,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { User } from "iconsax-react";
 import React from "react";
 
-const Testimony = () => {
+const Testimony = (props: { name: string; company: string; des: string }) => {
   return (
     <Box minW={500} bg={"#F3E2DD"} p={10} borderRadius={20} width={500}>
       {/* <Image /> */}
@@ -18,16 +18,13 @@ const Testimony = () => {
         </Box>
         <Box>
           <Text fontWeight={800} fontSize={20}>
-            Areegbe David
+            {props.name}
           </Text>
-          <Text>CEO David_Code</Text>
+          <Text>{props.company}</Text>
         </Box>
       </Flex>
       <Text fontWeight={500} py={5}>
-        “Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eveniet
-        suscipit ducimus consectetur magni tempore, minus quidem dolor at
-        dignissimos libero provident adipisci? Labore incidunt impedit ab ad?
-        Temporibus, ab!”
+        {props.des}
       </Text>
     </Box>
   );

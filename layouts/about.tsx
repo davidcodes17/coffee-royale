@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { ArrowRight2 } from "iconsax-react";
 import React from "react";
 
@@ -9,6 +9,7 @@ const About = () => {
       borderRadius={20}
       my={{ lg: 10, md: "30px", sm: "30px", base: "30px" }}
       width={"100%"}
+      id="about"
       py={{ lg: 10, md: 20, sm: 20, base: 20 }}
       px={{ lg: 200, md: 100, sm: 10, base: 10 }}
     >
@@ -21,6 +22,7 @@ const About = () => {
             Check out our <br /> best Coffee Beans
           </Heading>
           <Button
+            mt={5}
             bg={"#74422D"}
             py={{ lg: 8, md: 6, sm: 6, base: 6 }}
             borderRadius={40}

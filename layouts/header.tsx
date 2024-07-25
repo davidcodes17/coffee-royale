@@ -109,19 +109,19 @@ const Header = () => {
           alignItems={"center"}
         >
           <Text>
-            <Link href="/">Product</Link>
+            <Link href="#products">Product</Link>
           </Text>
           <Text>
-            <Link href="/">Special Offers</Link>
+            <Link href="#">The Process</Link>
           </Text>
           <Text>
-            <Link href="/">The Process</Link>
+            <Link href="#about">About</Link>
           </Text>
           <Text>
-            <Link href="/">Packing</Link>
+            <Link href="#customer">Review</Link>
           </Text>
           <Text>
-            <Link href="/">About</Link>
+            <Link href="#footer">Contact Us</Link>
           </Text>
         </Flex>
 
@@ -166,6 +166,7 @@ const Header = () => {
             <Button
               color={"#fff"}
               borderRadius={100}
+              display={{ lg: "flex", md: "flex", sm: "none", base: "none" }}
               _hover={{ bg: "#74422D" }}
               py={6}
               px={7}

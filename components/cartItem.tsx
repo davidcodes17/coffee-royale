@@ -29,9 +29,14 @@ const CartItem = (props: {
 
   // Update the quantity in the cart and set the total
   const handleQuantityChange = (value: string) => {
-    const newQuantity = Number(value);
-    setQuantity(newQuantity);
-    updateCartItem(props.id, newQuantity);
+    const number = parseInt(value);
+    if (number <= 0 || number >= 10) {
+      null;
+    } else {
+      const newQuantity = Number(value);
+      setQuantity(newQuantity);
+      updateCartItem(props.id, newQuantity);
+    }
   };
 
   return (
@@ -53,12 +58,7 @@ const CartItem = (props: {
           </Text>
         </Box>
         <Box>
-          <NumberInput
-            value={quantity}
-            onChange={handleQuantityChange}
-            min={1}
-            max={10}
-          >
+          <NumberInput value={quantity} onChange={handleQuantityChange}>
             <NumberInputField width={{ lg: 100, md: 100, sm: 70 }} />
             <NumberInputStepper>
               <NumberIncrementStepper />

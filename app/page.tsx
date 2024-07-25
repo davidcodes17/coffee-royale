@@ -8,6 +8,7 @@ import Header from "@/layouts/header";
 import Hero from "@/layouts/hero";
 import Products from "@/layouts/products";
 import Testimonies from "@/layouts/testimonies";
+import TheProcess from "@/layouts/theProcess";
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
 
@@ -23,10 +24,11 @@ const page = () => {
             </Box>
             <Line />
           </Box>
-          <Box px={{ lg: 40, md: 5, sm: 5, base: 5 }}>
-            <Products />
+          <Box mt={100} px={{ lg: 40, md: 5, sm: 5, base: 5 }}>
+            <Products mt={200} />
+            <TheProcess />
             <About />
-            <Products />
+            <Products mt={100} />
           </Box>
           <Testimonies />
           <Footer />

@@ -11,6 +11,7 @@ const Hero = () => {
   return (
     <Box mt={{ lg: 50, md: 10, sm: 5, base: 5 }}>
       <Flex
+        pr={5}
         alignItems={"center"}
         gap={{ lg: "120px", md: 10, sm: 10, base: 10 }}
         flexWrap={{ lg: "nowrap", md: "wrap", sm: "wrap", base: "wrap" }}
@@ -18,28 +19,28 @@ const Hero = () => {
       >
         <Box>
           <Heading
-            fontSize={{ lg: 100, md: 70, sm: 70, base: 70 }}
+            fontSize={{ lg: 70, md: 70, sm: 70, base: 50 }}
             fontWeight={900}
           >
             Café Royale
           </Heading>
           <Text
-            fontSize={{ lg: 60, md: "30px", sm: "30px", base: "30px" }}
+            fontSize={{ lg: 40, md: "30px", sm: "30px", base: "30px" }}
             fontWeight={900}
           >
-            An Online Coffee Store
+            Coffee With Royalty
           </Text>
-          <Text fontSize={{ lg: "25px", md: 20, sm: 20, base: 20 }} py={5}>
+          <Text fontSize={{ lg: "20px", md: 15, sm: 15, base: 12 }} py={5}>
             Straight to your doorstep. We don't roast our beans until we have
             your order. Every order is roasted and shipped the same day
           </Text>
-          <Flex gap={5}>
+          <Flex alignItems={"center"} gap={5}>
             <Button
               bg={"#74422D"}
               py={{ lg: 7, md: 6, sm: 6, base: 6 }}
               borderRadius={40}
-              px={{ lg: 7, md: 5, sm: 5, base: 5 }}
-              fontSize={{ lg: 15, md: 12, sm: 12, base: 12 }}
+              px={{ lg: 6, md: 5, sm: 5, base: 5 }}
+              fontSize={{ lg: 12, md: 12, sm: 12, base: 12 }}
               color={"#fff"}
               rightIcon={<ArrowRight2 />}
               _hover={{ bg: "#74422D" }}
@@ -53,13 +54,14 @@ const Hero = () => {
                   bg: "none",
                 }}
                 bg={"none"}
-                py={{ lg: 7, md: 6, sm: 6, base: 6 }}
+                py={{ lg: 6, md: 6, sm: 6, base: 6 }}
+                display={{ lg: "flex", md: "flex", sm: "none", base: "none" }}
                 px={{ lg: 7, md: 5, sm: 5, base: 5 }}
                 borderRadius={40}
                 onClick={() => {
                   router.push("/login");
                 }}
-                fontSize={{ lg: 15, md: 12, sm: 12, base: 12 }}
+                fontSize={{ lg: 12, md: 12, sm: 12, base: 12 }}
                 color={"#74422D"}
               >
                 Login / Sign up
@@ -70,30 +72,13 @@ const Hero = () => {
             <Box>
               <Text>Our Products</Text>
               <Heading mt={2} fontSize={40} fontWeight={900}>
-                +1000
-              </Heading>
-            </Box>
-            <Box
-              borderLeft={"2px solid #300809"}
-              borderRight={"2px solid #300809"}
-              px={5}
-              mx={5}
-            >
-              <Text>Our Products</Text>
-              <Heading mt={2} fontSize={40} fontWeight={900}>
-                +1000
-              </Heading>
-            </Box>
-            <Box>
-              <Text>Our Products</Text>
-              <Heading mt={2} fontSize={40} fontWeight={900}>
-                +1000
+                +7
               </Heading>
             </Box>
           </Flex>
         </Box>
         <Image
-          src="/coffe-cup.jpg"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Cappuccino_at_Sightglass_Coffee.jpg/640px-Cappuccino_at_Sightglass_Coffee.jpg"
           display={{ lg: "block", md: "block", sm: "none", base: "none" }}
           height={{ lg: "100%", md: 200 }}
           width={{ lg: "40vw", md: "100%", sm: "100%", base: "100%" }}

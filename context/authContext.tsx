@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           duration: 5000,
           isClosable: true,
         });
-        router.push("/login");
+        // router.push("/login");
       }
     };
 

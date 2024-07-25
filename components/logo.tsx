@@ -1,10 +1,10 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import React from "react";
 
 const Logo = () => {
   return (
     <Box>
-      <Text fontSize={40}>Café Royale</Text>
+      <Image src="/llo.jpg" width={"30%"} borderRadius={10} />
     </Box>
   );
 };

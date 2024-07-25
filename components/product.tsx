@@ -45,7 +45,7 @@ const Product = (props: {
         {props.name}
       </Text>
       <Text fontSize={40} fontWeight={800}>
-        ${props.price}
+        £ {props.price}
       </Text>
       <Flex
         mt={5}

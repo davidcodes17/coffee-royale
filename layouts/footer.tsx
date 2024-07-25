@@ -5,12 +5,19 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <Box bg={"#F3E2DD"} p={20} px={{ lg: 60, md: 10, sm: 10, base: 10 }}>
+    <Box
+      id="footer"
+      bg={"#F3E2DD"}
+      p={20}
+      px={{ lg: 20, md: 10, sm: 10, base: 10 }}
+    >
       <Flex gap={{ lg: 40, md: 10, sm: 10, base: 10 }} flexWrap={"wrap"}>
         <Box>
           <Logo />
           <Box my={2}>
-            <Text>09015061171, 08094601448</Text>
+            <Text>+1 (787) 966-74-75 +1 (212) 933-90-60</Text>
+            <Text>Fife</Text>
+            <Text>info@cart-royal.com</Text>
           </Box>
           <Flex mb={2} gap={5}>
             <Instagram size={30} />
@@ -33,8 +40,9 @@ const Footer = () => {
         <Box width={{ lg: "500px", md: "100%", sm: "100%", base: "100%" }}>
           <Text fontSize={"30px"}>Subscribe to Our News Letter</Text>
           <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-            dolorum error dolorem,
+            Subscribing to the Cafe Royal newsletter keeps me updated on the
+            latest promotions and new flavors. It’s the best way to stay
+            connected with my favorite coffee brand.
           </Text>
           <Flex
             mt={2}
